@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 // biasanya penamaan identifier menggunakan useXXX, tetapi tidak wajib
 export const useCounter = defineStore("counter", () => {
@@ -13,9 +13,16 @@ export const useCounter = defineStore("counter", () => {
     function reset() {
         counter.value = 0;
     }
+    
+    const doubled = computed(() => {
+        console.info("computed value");
+        return counter.value * 2;
+    })
+
     return {
         counter,
         increment, // export methodnya agar bisa dipanggil
         reset,
+        doubled,
     };
 });
